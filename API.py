@@ -13,11 +13,15 @@ sehirler = {
     "Trabzon": "Trabzon",
     "Adana": "Adana",
     "Gaziantep": "Gaziantep",
-    "Londra": "London",
-    "Paris": "Paris",
-    "Berlin": "Berlin",
-    "New York": "New York",
-    "Tokyo": "Tokyo"
+    "Konya":"Konya",
+    "Şanlıurfa":"Sanliurfa",
+    "Kocaeli":"Kocaeli",
+    "Mersin":"Mersin",
+    "Diyarbakır":"Diyarbakir",
+    "Hatay":"Hatay",
+    "Manisa":"Manisa",
+    "Kayseri":"Kayseri",
+    "Samsun":"Samsun",
 }
 
 wmo_turkce = {

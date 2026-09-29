@@ -1,8 +1,24 @@
 import requests
 import streamlit as st
-from streamlit_geolocation import streamlit_geolocation
 
 st.set_page_config(page_title="Hava Durumu", page_icon="☁️", layout="centered")
+
+# Görünen ad (Türkçe) -> API'ye gönderilecek ad (İngilizce karakterli) eşleştirmesi
+sehirler = {
+    "İstanbul": "Istanbul",
+    "Ankara": "Ankara",
+    "İzmir": "Izmir",
+    "Antalya": "Antalya",
+    "Bursa": "Bursa",
+    "Trabzon": "Trabzon",
+    "Adana": "Adana",
+    "Gaziantep": "Gaziantep",
+    "Londra": "London",
+    "Paris": "Paris",
+    "Berlin": "Berlin",
+    "New York": "New York",
+    "Tokyo": "Tokyo"
+}
 
 wmo_turkce = {
     0: "Açık gökyüzü",
@@ -26,51 +42,55 @@ wmo_turkce = {
 def get_wmo_text(code):
     return wmo_turkce.get(code, "Bilinmeyen hava durumu")
 
+# ARAYÜZ
 st.title("☁️ GÜNCEL HAVA DURUMU ☁️")
-st.header("Konum Bilgileriniz")
+st.header("Konum Bilgileri")
 
-st.write("Lütfen konumunuzu paylaşmak için aşağıdaki butona tıklayın:")
-location = streamlit_geolocation()
+# Kullanıcı ekranda Türkçe düzgün isimleri görür (İstanbul, İzmir vb.)
+secilen_turkce_sehir = st.selectbox("Bir Şehir Seçin:", list(sehirler.keys()))
 
-if location and location.get('latitude') and location.get('longitude'):
-    enlem = location['latitude']
-    boylam = location['longitude']
-    
+# API'ye göndermek için İngilizce karakterli karşılığını alıyoruz
+api_sehir_adi = sehirler[secilen_turkce_sehir]
+
+if secilen_turkce_sehir:
     try:
-        with st.spinner("Hava durumu bilgileri alınıyor..."):
-            geo_url = f"https://nominatim.openstreetmap.org/reverse?format=json&lat={enlem}&lon={boylam}&accept-language=tr"
-            headers = {'User-Agent': 'StreamlitWeatherApp/1.0'}
-            geo_response = requests.get(geo_url, headers=headers).json()
+        with st.spinner("Seçilen şehrin koordinatları ve hava durumu alınıyor..."):
+            # API'ye İngilizce karakterli adı gönderiyoruz
+            geo_url = f"https://geocoding-api.open-meteo.com/v1/search?name={api_sehir_adi}&count=1&language=tr&format=json"
+            geo_response = requests.get(geo_url).json()
             
-            address = geo_response.get("address", {})
-            sehir = address.get("city") or address.get("town") or address.get("province") or "Bilinmiyor"
-            ulke = address.get("country", "Türkiye")
-            
-            # Hava durumu verilerini Open-Meteo'dan çekelim
-            weather_url = f"https://api.open-meteo.com/v1/forecast?latitude={enlem}&longitude={boylam}&current_weather=true&current_weather_units=true"
-            hava_url = requests.get(weather_url).json()
-            
-            sicaklik = hava_url["current_weather"]["temperature"]
-            ruzgar_hizi = hava_url["current_weather"]["windspeed"]
-            wmo_kodu = hava_url["current_weather"]["weathercode"]
-            derece_isaret = hava_url["current_weather_units"]["temperature"]
-            ruzgar_hizi_isaret = hava_url["current_weather_units"]["windspeed"]
+            if "results" in geo_response and len(geo_response["results"]) > 0:
+                konum = geo_response["results"][0]
+                enlem = konum["latitude"]
+                boylam = konum["longitude"]
+                ulke = konum.get("country", "")
+                
+                # Bulunan koordinatlarla hava durumu verisini çekiyoruz
+                weather_url = f"https://api.open-meteo.com/v1/forecast?latitude={enlem}&longitude={boylam}&current_weather=true&current_weather_units=true"
+                hava_url = requests.get(weather_url).json()
+                
+                sicaklik = hava_url["current_weather"]["temperature"]
+                ruzgar_hizi = hava_url["current_weather"]["windspeed"]
+                wmo_kodu = hava_url["current_weather"]["weathercode"]
+                derece_isaret = hava_url["current_weather_units"]["temperature"]
+                ruzgar_hizi_isaret = hava_url["current_weather_units"]["windspeed"]
 
-        st.info(f"📍 {ulke} / {sehir}")
-        
-        st.header("Anlık Hava Durumu")
-        col1, col2 = st.columns(2)
-        with col1:
-            st.metric(label="Sıcaklık", value=f"{sicaklik} {derece_isaret}")
-        with col2:
-            st.metric(label="Rüzgar Hızı", value=f"{ruzgar_hizi} {ruzgar_hizi_isaret}")
-            
-        st.success(f"Hava Durumu: {get_wmo_text(wmo_kodu)}.")
+                st.info(f"📍 {ulke} / {secilen_turkce_sehir}")
+                
+                st.header("Anlık Hava Durumu")
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.metric(label="Sıcaklık", value=f"{sicaklik} {derece_isaret}")
+                with col2:
+                    st.metric(label="Rüzgar Hızı", value=f"{ruzgar_hizi} {ruzgar_hizi_isaret}")
+                    
+                st.success(f"Hava Durumu: {get_wmo_text(wmo_kodu)}.")
+            else:
+                st.warning("Seçilen şehir için konum bilgisi bulunamadı.")
 
-    except Exception as e:
-        st.error("Hava durumu verileri alınırken bir hata oluştu.")
-else:
-    st.warning("Lütfen yukarıdaki butona basarak konum izni verin.")
+    except requests.exceptions.RequestException:
+        st.title("Bağlantı Hatası!")
+        st.error("Bir Sorun Oluştu! Lütfen Daha Sonra Tekrar Deneyiniz.")
 
 if st.button("Yenile"):
     st.rerun()

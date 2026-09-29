@@ -14,7 +14,7 @@ sehirler = {
     "Adana": "Adana",
     "Gaziantep": "Gaziantep",
     "Konya":"Konya",
-    "Şanlıurfa":"Sanliurfa",
+    "Şanlıurfa":"Urfa",
     "Kocaeli":"Kocaeli",
     "Mersin":"Mersin",
     "Diyarbakır":"Diyarbakir",

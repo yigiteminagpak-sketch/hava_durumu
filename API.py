@@ -22,6 +22,10 @@ sehirler = {
     "Manisa":"Manisa",
     "Kayseri":"Kayseri",
     "Samsun":"Samsun",
+    "Balıkesir":"Balikesir",
+    "Tekirdağ":"Tekirdag",
+    "Aydın":"Aydin",
+    "Kahramanmaraş":"Kahramanmaras"
 }
 
 wmo_turkce = {

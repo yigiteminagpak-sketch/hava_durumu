@@ -48,6 +48,22 @@ sehirler = {
     "Çorum":"Corum",
     "Ağrı":"Agri",
     "Giresun":"Giresun",
+    "Isparta":"Isparta",
+    "Aksaray":"Aksaray",
+    "Edirne":"Edirne",
+    "Düzce":"Duzce",
+    "Yozgat":"Yozgat",
+    "Muş":"Mus",
+    "Kastamonu":"Kastamonu",
+    "Kırklareli":"Kirklereli",
+    "Niğde":"Nigde",
+    "Uşak":"Usak",
+    "Bitlis":"Bitlis",
+    "Rize":"Rize",
+    "Amasya":"Amasya",
+    "Siirt":"Siirt",
+    "Bolu":"Bolu",
+    "Çankırı":"Cankiri"
 }
 
 wmo_turkce = {

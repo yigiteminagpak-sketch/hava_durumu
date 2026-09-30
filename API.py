@@ -35,6 +35,21 @@ sehirler = {
     "Ordu":"Ordu",
     "Malatya":"Malatya",
     "Afyonkarahisar":"Afyonkarahisar",
+    "Erzurum":"Erzurum",
+    "Batman":"Batman",
+    "Sivas":"Sivas",
+    "Adıyaman":"Adiyaman",
+    "Tokat":"Tokat",
+    "Elazığ":"Elazig",
+    "Zonguldak":"Zonguldak",
+    "Çanakkale":"Canakkale",
+    "Şırnak":"Sirnak",
+    "Kütahya":"Kutahya",
+    "Osmaniye":"Osmaniye",
+    "Çorum":"Corum",
+    "Ağrı":"Agri",
+    "Giresun":"Giresun",
+    "Çankırı":"Cankiri",
 }
 
 wmo_turkce = {

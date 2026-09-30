@@ -55,7 +55,6 @@ sehirler = {
     "Yozgat":"Yozgat",
     "Muş":"Mus",
     "Kastamonu":"Kastamonu",
-    "Kırklareli":"Kirklereli",
     "Niğde":"Nigde",
     "Uşak":"Usak",
     "Bitlis":"Bitlis",
@@ -63,7 +62,6 @@ sehirler = {
     "Amasya":"Amasya",
     "Siirt":"Siirt",
     "Bolu":"Bolu",
-    "Çankırı":"Cankiri"
 }
 
 wmo_turkce = {

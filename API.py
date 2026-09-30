@@ -25,7 +25,16 @@ sehirler = {
     "Balıkesir":"Balikesir",
     "Tekirdağ":"Tekirdag",
     "Aydın":"Aydin",
-    "Kahramanmaraş":"Kahramanmaras"
+    "Kahramanmaraş":"Kahramanmaras",
+    "Sakarya":"Sakarya",
+    "Van":"Van",
+    "Muğla":"Mugla",
+    "Denizli":"Denizli",
+    "Eskişehir":"Eskisehir",
+    "Mardin":"Mardin",
+    "Ordu":"Ordu",
+    "Malatya":"Malatya",
+    "Afyonkarahisar":"Afyonkarahisar",
 }
 
 wmo_turkce = {

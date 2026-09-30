@@ -40,7 +40,6 @@ sehirler = {
     "Sivas":"Sivas",
     "Adıyaman":"Adiyaman",
     "Tokat":"Tokat",
-    "Elazığ":"Elazig",
     "Zonguldak":"Zonguldak",
     "Çanakkale":"Canakkale",
     "Şırnak":"Sirnak",
@@ -49,7 +48,6 @@ sehirler = {
     "Çorum":"Corum",
     "Ağrı":"Agri",
     "Giresun":"Giresun",
-    "Çankırı":"Cankiri",
 }
 
 wmo_turkce = {

@@ -121,7 +121,6 @@ if secilen_turkce_sehir:
                 konum = geo_response["results"][0]
                 enlem = konum["latitude"]
                 boylam = konum["longitude"]
-                nufus = konum["population"]
                 ulke = konum.get("country", "")
                 
                 # Bulunan koordinatlarla hava durumu verisini çekiyoruz
@@ -137,13 +136,11 @@ if secilen_turkce_sehir:
                 st.info(f"📍 {ulke} / {secilen_turkce_sehir}")
                 
                 st.header("Anlık Hava Durumu ve Nüfus")
-                col1, col2, col3 = st.columns(3)
+                col1, col2 = st.columns(2)
                 with col1:
                     st.metric(label="Sıcaklık", value=f"{sicaklik} {derece_isaret}")
                 with col2:
                     st.metric(label="Rüzgar Hızı", value=f"{ruzgar_hizi} {ruzgar_hizi_isaret}")
-                with col3:
-                    st.metric(label="Nüfus", value=f"{nufus} kişi")
                     
                 st.success(f"Hava Durumu: {get_wmo_text(wmo_kodu)}.")
             else:
